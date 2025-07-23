@@ -19,7 +19,7 @@
   padding: 20px 25px;
   h2 {
     margin: 0;
-    @include absolute(top 5px, left -15px);
+    @include absolute(5px, $left: -15px);
     padding: 5px;
     font-size: 10px;
     border-top-left-radius: 5px;
@@ -51,17 +51,17 @@
     display: none;
   }
   .progress {
-    @include absolute(top 15px, right 20px);
+    @include absolute(15px, $right: 20px);
   }
   .attempts {
     display: none;
-    @include absolute(top, right);
+    @include absolute(0, $right: 0);
     padding: 5px 8px;
     border-radius: 2px;
     font-size: 10px;
   }
   .remove {
-    @include absolute(top 30px, right -6px);
+    @include absolute(30px, $right: -6px);
     /*background: white*/
     background: #F05151;
     color: white;
@@ -86,7 +86,7 @@
     }
   }
   .restart {
-    @include absolute(top 30px, right -6px);
+    @include absolute(30px, $right: -6px);
     /*background: white*/
     background: #00e600;
     color: white;

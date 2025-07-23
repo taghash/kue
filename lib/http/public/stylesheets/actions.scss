@@ -1,6 +1,6 @@
 
 #actions {
-  @include fixed(top -2px, right -2px);
+  @include fixed(-2px, $right: -2px);
   z-index: 20;
 }
 
@@ -13,7 +13,7 @@
   border: 1px solid #eee;
   border-radius: 0 0 0 5px;
   -webkit-appearance: none;
-  color: dark;
+  color: $dark;
   outline: none;
   &:hover {
     border-color: darken(#eee, 10%);

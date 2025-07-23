@@ -2,7 +2,7 @@
 
 #menu {
   @include reset-list();
-  @include fixed(top, left);
+  @include fixed(0, $left: 0);
   height: 100%;
   width: 80px;
   background: $menu-bg;
@@ -26,7 +26,7 @@
       }
     }
     .count {
-      @include absolute(top 15px, left);
+      @include absolute(15px, $left: 0);
       text-shadow: 1px 1px 1px darken($menu-bg, $menu-intensity);
       width: 100%;
       color: lighten($menu-fg, ($menu-intensity / 2));

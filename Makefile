@@ -1,11 +1,16 @@
 REPORTER = spec
 
-all:    build
+all:    build css
 
 build:
 	@./node_modules/coffee-script/bin/coffee \
     -c \
     -o lib src
+
+css:
+	@./node_modules/.bin/node-sass \
+    lib/http/public/stylesheets/main.scss \
+    lib/http/public/stylesheets/main.css
 
 test-tdd:
 	@./node_modules/.bin/mocha \

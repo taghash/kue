@@ -1,8 +1,4 @@
-@mixin font-smoothing($args...) {
-  -webkit-font-smoothing: $args;
-}
-
-// @import 'nib';
+@import 'nib.scss';
 @import 'config';
 @import 'scrollbar';
 @import 'menu';

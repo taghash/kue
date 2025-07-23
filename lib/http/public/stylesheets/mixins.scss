@@ -16,33 +16,7 @@
   border-radius: 4px;
 }
 
-@mixin fixed($top: null, $right: null, $bottom: null, $left: null) {
-  position: fixed;
-  @if $top { top: $top; }
-  @if $right { right: $right; }
-  @if $bottom { bottom: $bottom; }
-  @if $left { left: $left; }
-}
-
-@mixin absolute($top: null, $right: null, $bottom: null, $left: null) {
-  position: absolute;
-  @if $top { top: $top; }
-  @if $right { right: $right; }
-  @if $bottom { bottom: $bottom; }
-  @if $left { left: $left; }
-}
-
 @mixin bold-button($glow: #00ABFA) {
   font-weight: bold;
   text-shadow: 0 0 5px $glow;
-}
-
-@mixin reset-table() {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-@mixin font-smoothing($args...) {
-  -webkit-font-smoothing: $args;
-  -moz-osx-font-smoothing: grayscale;
 }
