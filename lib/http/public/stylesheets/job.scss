@@ -26,7 +26,7 @@
     border-bottom-left-radius: 5px;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
-    background: linear-gradient(left, darken($menu-fg, 10%), 50% lighten($menu-fg, 5%));
+    @include linear-gradient(left, darken($menu-fg, 10%), 50% lighten($menu-fg, 5%));
     box-shadow: -1px 0 1px 1px rgba(black, .1);
     color: white;
     text-shadow: 1px 1px 1px #444;
