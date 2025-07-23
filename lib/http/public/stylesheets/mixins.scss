@@ -31,3 +31,8 @@
   @if $bottom { bottom: $bottom; }
   @if $left { left: $left; }
 }
+
+@mixin bold-button($glow: #00ABFA) {
+  font-weight: bold;
+  text-shadow: 0 0 5px $glow;
+}
