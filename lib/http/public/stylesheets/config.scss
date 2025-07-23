@@ -1,32 +1,32 @@
 // general colors
 
-dark = #3b3b3b
-light = #666
-lighter = #777
+$dark: #3b3b3b;
+$light: #666;
+$lighter: #777;
 
-bg = #fff
+$bg: #fff;
 
 // status colors
 
-inactive-color = #00CCCC
-complete-color = #00CC7A
-active-color = #CCC500
-failed-color = #c00
+$inactive-color: #00CCCC;
+$complete-color: #00CC7A;
+$active-color: #CCC500;
+$failed-color: #c00;
 
 // menu config
 
-menu-bg = dark
-menu-fg = lighter
+$menu-bg: $dark;
+$menu-fg: $lighter;
 
-menu-intensity = 13%
-menu-colored = false
+$menu-intensity: 13%;
+$menu-colored: false;
 
 // job config
 
-job-bg = white
+$job-bg: white;
 
 // scrollbar
 
-scroll-bg = transparent
-scroll-thumb = menu-bg
-scroll-width = 6px
+$scroll-bg: transparent;
+$scroll-thumb: $menu-bg;
+$scroll-width: 6px;

@@ -1,14 +1,33 @@
-reset-list()
-  margin: 0
-  padding: 0
-  li
-    margin: 0
-    list-style: none
+@mixin reset-list() {
+  margin: 0;
+  padding: 0;
+  li {
+    margin: 0;
+    list-style: none;
+  }
+}
 
-decorated-box()
-  border: 1px solid #eee
-  border-bottom-color: rgba(black, .25)
-  border-left-color: rgba(black, .2)
-  border-right-color: rgba(black, .2)
-  box-shadow: 0 2px 2px 0 rgba(black, .1)
-  border-radius: 4px
+@mixin decorated-box() {
+  border: 1px solid #eee;
+  border-bottom-color: rgba(black, .25);
+  border-left-color: rgba(black, .2);
+  border-right-color: rgba(black, .2);
+  box-shadow: 0 2px 2px 0 rgba(black, .1);
+  border-radius: 4px;
+}
+
+@mixin fixed($top: null, $right: null, $bottom: null, $left: null) {
+  position: fixed;
+  @if $top { top: $top; }
+  @if $right { right: $right; }
+  @if $bottom { bottom: $bottom; }
+  @if $left { left: $left; }
+}
+
+@mixin absolute($top: null, $right: null, $bottom: null, $left: null) {
+  position: absolute;
+  @if $top { top: $top; }
+  @if $right { right: $right; }
+  @if $bottom { bottom: $bottom; }
+  @if $left { left: $left; }
+}
