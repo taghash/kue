@@ -1,0 +1,195 @@
+@import 'mixins';
+
+#job-template {
+  display: none;
+}
+
+@mixin bar($color) {
+  background: linear-gradient(top, lighten($color, 20%), $color);
+  border: 1px solid rgba(white, .2);
+  color: white;
+}
+
+// generic blocks
+
+.block {
+  @include decorated-box();
+  width: 90%;
+  margin: 10px 25px;
+  padding: 20px 25px;
+  h2 {
+    margin: 0;
+    @include absolute(5px, $left: -15px);
+    padding: 5px;
+    font-size: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    // @include linear-gradient(left, darken($menu-fg, 10%), 50% lighten($menu-fg, 5%));
+    @include linear-gradient(to right, #6b6b6b, #7e7e7e 50%);
+
+    box-shadow: -1px 0 1px 1px rgba(black, .1);
+    color: white;
+    text-shadow: 1px 1px 1px #444;
+  }
+  .type {
+    color: #929292;
+  }
+}
+
+// job delay
+.job td.title em {
+  color: lighten($lighter, 20%);
+}
+
+// job blocks
+
+.job .block {
+  position: relative;
+  background: $job-bg;
+  cursor: pointer;
+  table td:first-child {
+    display: none;
+  }
+  .progress {
+    @include absolute(15px, $right: 20px);
+  }
+  .attempts {
+    display: none;
+    @include absolute(0, $right: 0);
+    padding: 5px 8px;
+    border-radius: 2px;
+    font-size: 10px;
+  }
+  .remove {
+    @include absolute(30px, $right: -6px);
+    /*background: white*/
+    background: #F05151;
+    color: white;
+    display: block;
+    $size: 20px;
+    width: $size;
+    height: $size;
+    line-height: $size;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    outline: none;
+    border: 1px solid #eee;
+    border-radius: $size;
+    transition: opacity 200ms, top 300ms;
+    opacity: 0;
+    &:hover {
+      border: 1px solid darken(#eee, 10%);
+    }
+    &:active {
+      border: 1px solid darken(#eee, 20%);
+    }
+  }
+  .restart {
+    @include absolute(30px, $right: -6px);
+    /*background: white*/
+    background: #00e600;
+    color: white;
+    display: block;
+    $size: 20px;
+    width: $size;
+    height: $size;
+    line-height: $size;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    outline: none;
+    border: 1px solid #eee;
+    border-radius: $size;
+    transition: opacity 200ms, top 300ms;
+    opacity: 0;
+    &:hover {
+      border: 1px solid darken(#eee, 10%);
+    }
+    &:active {
+      border: 1px solid darken(#eee, 20%);
+    }
+  }
+  &:hover {
+    .remove {
+      opacity: 1;
+      top: -6px;
+    }
+    .restart {
+      opacity: 1;
+      top: 16px;
+    }
+  }
+}
+
+// details
+
+.job .details {
+  background: $dark;
+  width: 89%;
+  margin-top: -10px;
+  margin-left: 35px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: inset 0 1px 10px 0 rgba(black, .8);
+  transition: padding 200ms, height 200ms;
+  height: 0;
+  overflow: hidden;
+  table {
+    width: 100%;
+    td:first-child {
+      width: 60px;
+      color: lighten($light, 30%);
+    }
+  }
+  &.show {
+    padding: 15px 20px;
+    height: auto;
+  }
+}
+
+// job log
+
+.job ul.log {
+  @include reset-list();
+  margin: 5px;
+  padding: 10px;
+  max-height: 100px;
+  overflow-y: auto;
+  border-radius: 5px;
+  width: 95%;
+  li {
+    padding: 5px 0;
+    border-bottom: 1px dotted darken($light, 35%);
+    color: $light;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+// scrollbar
+
+.job .details {
+  ::-webkit-scrollbar {
+    width: 2px;
+  }
+  ::-webkit-scrollbar-thumb:vertical {
+    background: lighten($light, 20%);
+  }
+  ::-webkit-scrollbar-track {
+    border: 1px solid rgba(white, .1);
+  }
+}
+
+// sections
+
+.job .details > div {
+  padding: 10px 0;
+  border-bottom: 1px solid darken($light, 35%);
+  &:last-child {
+    border-bottom: none;
+  }
+}

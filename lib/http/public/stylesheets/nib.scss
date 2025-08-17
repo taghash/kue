@@ -1,0 +1,779 @@
+// This file will contain all reimplemented Nib mixins.
+
+// Positions mixins
+@mixin fixed($top: null, $right: null, $bottom: null, $left: null) {
+  position: fixed;
+  @if $top != null { top: $top; }
+  @if $right != null { right: $right; }
+  @if $bottom != null { bottom: $bottom; }
+  @if $left != null { left: $left; }
+}
+
+@mixin absolute($top: null, $right: null, $bottom: null, $left: null) {
+  position: absolute;
+  @if $top != null { top: $top; }
+  @if $right != null { right: $right; }
+  @if $bottom != null { bottom: $bottom; }
+  @if $left != null { left: $left; }
+}
+
+@mixin relative($top: null, $right: null, $bottom: null, $left: null) {
+  position: relative;
+  @if $top != null { top: $top; }
+  @if $right != null { right: $right; }
+  @if $bottom != null { bottom: $bottom; }
+  @if $left != null { left: $left; }
+}
+
+// Reset mixins
+@mixin reset-table() {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+
+// Vendor mixins
+@mixin font-smoothing($args...) {
+  -webkit-font-smoothing: $args;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Border-radius mixin
+@mixin border-radius($radius...) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+// Border mixin
+@mixin border($color, $args...) {
+  @if type-of($color) == color {
+    border: 1px solid $color $args;
+  } @else {
+    border: $color $args;
+  }
+}
+
+// Clearfix mixin
+@mixin clearfix() {
+  &::before,
+  &::after {
+    content: "";
+    display: table;
+  }
+  &::after {
+    clear: both;
+  }
+  zoom: 1; // For IE 6/7
+}
+
+// Size mixin
+@mixin size($width, $height: null) {
+  @if $height == null {
+    width: $width;
+    height: $width;
+  } @else {
+    width: $width;
+    height: $height;
+  }
+}
+
+// Text mixins
+$no-wrap: nowrap; // Alias for 'nowrap'
+
+@mixin whitespace($args...) {
+  white-space: $args;
+}
+
+@mixin ellipsis($no-wrap: true) {
+  @if $no-wrap {
+    white-space: nowrap;
+  }
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin hide-text() {
+  text-indent: 101%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@mixin replace-text($image, $x: 50%, $y: 50%) {
+  @include hide-text();
+  background-image: $image;
+  background-repeat: no-repeat;
+  background-position: $x $y;
+}
+
+@mixin shadow-stroke($n) {
+  text-shadow: -1px -1px 0 $n, 1px -1px 0 $n, -1px 1px 0 $n, 1px 1px 0 $n;
+}
+
+// Overflow mixin
+@mixin overflow($type) {
+  @if $type == ellipsis {
+    @include ellipsis();
+  } @else {
+    overflow: $type;
+  }
+}
+
+// Reset mixins (continued)
+@mixin global-reset() {
+  html, body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td {
+    @include reset-box-model();
+    @include reset-font();
+  }
+  body {
+    line-height: 1;
+    color: black;
+    background: white;
+  }
+  ol, ul {
+    list-style: none;
+  }
+  table {
+    @include reset-table();
+  }
+  caption, th, td {
+    @include reset-table-cell();
+  }
+  a img {
+    border: none;
+  }
+}
+
+@mixin nested-reset() {
+  div, span, object, iframe, h1, h2, h3, h4, h5, h6, p,
+  pre, a, abbr, acronym, address, code, del, dfn, em, img,
+  dl, dt, dd, ol, ul, li, fieldset, form, label,
+  legend, caption, tbody, tfoot, thead, tr {
+    @include reset-box-model();
+    @include reset-font();
+  }
+  table {
+    @include reset-table();
+  }
+  caption, th, td {
+    @include reset-table-cell();
+  }
+  a img {
+    border: none;
+  }
+}
+
+@mixin reset-box-model() {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+}
+
+@mixin reset-font() {
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+@mixin reset-body() {
+  line-height: 1;
+  color: black;
+  background: white;
+}
+
+@mixin reset-table-cell() {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+@mixin reset-html5() {
+  article, aside, canvas, details, figcaption,
+  figure, footer, header, hgroup, menu, nav,
+  section, summary, main {
+    @include reset-box-model();
+    display: block;
+  }
+  audio, canvas, video {
+    display: inline-block;
+  }
+  audio:not([controls]),[hidden] {
+    display: none;
+  }
+}
+
+// Normalize mixins
+@mixin normalize-base() {
+  html { // Prevent iOS text size adjust after orientation change.
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+  }
+}
+
+@mixin normalize-embed() {
+  img { // No border when inside `a` in IE 8~10.
+    border: 0;
+  }
+
+  svg:not(:root) { // Overflow should be hidden in IE 9~11.
+    overflow: hidden;
+  }
+}
+
+@mixin normalize-forms() {
+  button, input, optgroup, select, textarea {
+    color: inherit; // Correct color not being inherited.
+    font: inherit; // Correct font properties not being inherited.
+    margin: 0; // Fix margins in FF 4+, Safari, and Chrome.
+  }
+
+  button { // Fix `overflow` set to `hidden` in IE 8/9/10/11.
+    overflow: visible;
+  }
+
+  button, select { // Consistent text-transform across browsers.
+    text-transform: none;
+  }
+
+  // Fix WebKit bug in Android 4.0, inability to style clickable `input` in
+  // iOS and improve usability and consistency of cursor style.
+  button, html input[type='button'], input[type='reset'], input[type='submit'] {
+    cursor: pointer;
+    -webkit-appearance: button;
+  }
+
+  // Reset default cursor for disabled elements.
+  button[disabled], html input[disabled] {
+    cursor: default;
+  }
+
+  // Remove inner padding and border in FF 4+.
+  button::-moz-focus-inner, input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+  input { // Reset line-height again FF 4+ UA stylsheet.
+    line-height: normal;
+  }
+
+  // Fix box sizing and excess padding in IE 8~10
+  input[type='checkbox'], input[type='radio'] {
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  // Fix the cursor style for Chrome's increment/decrement buttons.
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    height: auto;
+  }
+
+  // Consistent appearance and box-sizing in Safari and Chrome.
+  input[type='search'] {
+    -webkit-appearance: textfield;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+
+  // No inner padding and search cancel button in Safari and Chrome on OS X.
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+
+  fieldset { // Consistent border, margin, and padding.
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+  }
+
+  legend { // Hack to correct `color` not being inherited in IE 8/9/10/11.
+    border: 0;
+    padding: 0;
+  }
+
+  textarea { // Remove default vertical scrollbar in IE 8~11.
+    overflow: auto;
+  }
+
+  optgroup { // Don't inherit the `font-weight` applied above.
+    font-weight: bold;
+  }
+}
+
+@mixin normalize-groups() {
+  figure { // Margin should exist in IE 8~9 / Safari.
+    margin: 1em 40px;
+  }
+
+  hr { // Consistency between FF and others.
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+  }
+
+  pre { // Contain overflow and wrap words.
+    overflow: auto;
+  }
+
+  // Hack to fix odd `em`-unit font size rendering in all browsers.
+  code, kbd, pre, samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+  }
+}
+
+@mixin normalize-html5() {
+  // `block` display for HTML5 elements in IE 8~11 and FF.
+  article, details, section, summary,
+  aside, main, menu, nav, figcaption,
+  figure, footer, header, hgroup {
+    display: block;
+  }
+
+  audio, canvas, progress, video {
+    display: inline-block; // Set `inline-block` not defined in IE 8~9.
+    vertical-align: baseline; // Fix v-align of `progress` in Chrome, FF, and O.
+  }
+
+  audio:not([controls]) {
+      display: none; // Prevent displaying `audio` without controls.
+      height: 0; // Remove excess height in iOS 5 devices.
+  }
+
+  [hidden], // Address `[hidden]` styling not present in IE 8~10.
+  template {  // Hide the `template` element in IE 8~11, Safari, and FF < 22.
+    display: none;
+  }
+}
+
+@mixin normalize-links() {
+  a { // No gray bg color in active links in IE 10.
+    background-color: transparent;
+    &:active, &:hover {
+      outline: 0; // + readability when focused.
+    }
+  }
+}
+
+@mixin normalize-tables() {
+  table { // Remove most spacing between table cells.
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  td, th {
+    padding: 0;
+  }
+}
+
+@mixin normalize-text() {
+  abbr[title] { // + style not present in IE 8~11, Safari, and Chrome.
+    border-bottom: 1px dotted;
+  }
+
+  dfn { // + style not present in Safari and Chrome.
+    font-style: italic;
+  }
+
+  mark { // + style not present in IE 8/9.
+    background: #ff0; color: #000;
+  }
+
+  b, strong { // Fix `font-weight: bolder` in FF 4+, Safari, and Chrome.
+    font-weight: bold;
+  }
+
+  h1 { // `h1` inside `section` and `article` fix for FF 4+, Safari & Chrome.
+    font-size: 2em;
+    margin: 0.67em 0;
+  }
+
+  small { // Consistent font-size across browsers.
+    font-size: 80%;
+  }
+
+  sub, sup { // Prevent `sub` and `sup` affecting `line-height`.
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sup {
+    top: -0.5em;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+}
+
+@mixin normalize-css() {
+  @include normalize-base();
+  @include normalize-html5();
+  @include normalize-links();
+  @include normalize-text();
+  @include normalize-embed();
+  @include normalize-groups();
+@include normalize-forms();
+@include normalize-tables();
+}
+
+// Iconic mixins
+@mixin iconic-stroke($path) {
+  @font-face {
+    font-family: 'IconicStroke';
+    src: url($path + '/iconic_stroke.eot');
+    src: local('☺'), url($path + '/iconic_stroke.ttf') format('truetype'), url($path + '/iconic_stroke.svg#iconic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+}
+
+// Helper functions for path manipulation (similar to Node.js path module)
+@function _extname($path) {
+  $index: str-last-index($path, '.');
+  @if $index {
+    @return str-slice($path, $index);
+  }
+  @return '';
+}
+
+@function _basename($path, $ext: null) {
+  $last-slash: str-last-index($path, '/');
+  $filename: if($last-slash, str-slice($path, $last-slash + 1), $path);
+  @if $ext and str-ends-with($filename, $ext) {
+    @return str-slice($filename, 1, str-length($filename) - str-length($ext));
+  }
+  @return $filename;
+}
+
+@function _dirname($path) {
+  $last-slash: str-last-index($path, '/');
+  @if $last-slash {
+    @return str-slice($path, 1, $last-slash - 1);
+  }
+  @return '';
+}
+
+@function _pathjoin($dir, $file) {
+  @if str-length($dir) > 0 and str-slice($dir, str-length($dir)) == '/' {
+    @return $dir + $file;
+  }
+  @return $dir + '/' + $file;
+}
+
+// Image mixin
+@mixin image($path, $w: auto, $h: auto, $min_pixel_ratio: 1.5) {
+  background-image: url($path);
+
+  $s: 'all and (-webkit-min-device-pixel-ratio: #{$min_pixel_ratio}),' +
+      '(min--moz-device-pixel-ratio: #{$min_pixel_ratio}),' +
+      '(-o-min-device-pixel-ratio: #{$min_pixel_ratio}/1),' +
+      '(min-device-pixel-ratio: #{$min_pixel_ratio}),' +
+      '(min-resolution: #{round($min_pixel_ratio * 92)}dpi),' +
+      '(min-resolution: #{$min_pixel_ratio}dppx)';
+
+  @media #{$s} {
+    $ext: _extname($path);
+    $base: _basename($path, $ext);
+    $dir: _dirname($path);
+    $path2x: _pathjoin($dir, $base + '@2x' + $ext);
+
+    background-image: url($path2x);
+    @if $w == cover or $w == contain {
+      background-size: $w;
+    } @else {
+      background-size: $w $h;
+    }
+  }
+}
+
+// Gradients mixins
+@mixin linear-gradient($direction, $color-stops...) {
+  background: linear-gradient($direction, $color-stops);
+}
+
+// Vendor prefix list
+$vendor-prefixes: ('-webkit-', '-moz-', '-ms-', '-o-', ''); // Empty string for official
+
+// Function to normalize gradient values (simplified from vendor-helpers.js)
+@function _normalize-gradient-value($value, $prefix: '') {
+  $result: $value;
+
+  // Simplified gradient normalization logic for SCSS
+  // This is a basic attempt to replicate some of the JS logic.
+  // Full replication of all edge cases from vendor-helpers.js would be very complex.
+
+  // Example: Convert 'to top' to 'bottom' for older prefixes
+  @if $prefix != '' and str-index($value, 'to top') {
+    $result: str-replace($value, 'to top', 'bottom');
+  } @else if $prefix != '' and str-index($value, 'to bottom') {
+    $result: str-replace($value, 'to bottom', 'top');
+  } @else if $prefix != '' and str-index($value, 'to left') {
+    $result: str-replace($value, 'to left', 'right');
+  } @else if $prefix != '' and str-index($value, 'to right') {
+    $result: str-replace($value, 'to right', 'left');
+  }
+
+  // Handle angle conversion (e.g., 45deg to 315deg for webkit)
+  // This is a very simplified example and might not cover all cases.
+  // SCSS does not have a native str-to-number function, so this part is omitted for now.
+  // If angle conversion is critical, a custom function would be needed.
+
+  @return $result;
+}
+
+// Function to normalize transform values (simplified from vendor-helpers.js)
+@function _normalize-transform-value($value, $prefix: '') {
+  $result: $value;
+  @if $prefix != '' and str-index($value, 'transform') {
+    $result: str-replace($value, 'transform', $prefix + 'transform');
+  }
+  @return $result;
+}
+
+// Function to normalize border-image values (simplified from vendor-helpers.js)
+@function _normalize-border-image-value($value, $prefix: '') {
+  $result: $value;
+  @if $prefix != '' and str-index($value, 'fill') {
+    $result: str-replace($value, 'fill', ''); // Remove 'fill' keyword
+  }
+  @return $result;
+}
+
+// Main vendor mixin
+@mixin vendor($property, $value, $vendor-property: true) {
+  $need-normalize: false;
+  @if $property == 'transition' or $property == 'transition-property' or $property == 'border-image' or $property == 'border-image-slice' {
+    $need-normalize: true;
+  }
+
+  @each $prefix in $vendor-prefixes {
+    $prefixed-property: $property;
+    $normalized-value: $value;
+
+    @if $vendor-property and $prefix != '' {
+      $prefixed-property: $prefix + $property;
+    }
+
+    @if $need-normalize {
+      @if $property == 'transition' or $property == 'transition-property' {
+        $normalized-value: _normalize-transform-value($value, $prefix);
+      } @else if $property == 'border-image' or $property == 'border-image-slice' {
+        $normalized-value: _normalize-border-image-value($value, $prefix);
+      }
+      // Add gradient normalization here if needed for background/background-image
+      // For now, linear-gradient mixin directly uses linear-gradient()
+    }
+
+    #{$prefixed-property}: $normalized-value;
+  }
+}
+
+// Flexbox variables and helpers
+$flex-version: (box, flex); // Default from Stylus config.styl
+$support-for-ie: true; // Default from Stylus config.styl
+
+// converts the justification alignment
+@function _convert-justify($align) {
+  @if $align == flex-start {
+    @return start;
+  } @else if $align == flex-end {
+    @return end;
+  } @else if $align == space-around {
+    @return distribute;
+  } @else if $align == space-between {
+    @return justify;
+  } @else {
+    @return $align;
+  }
+}
+
+// converts alignment from 'flex' to normal value
+@function _convert-alignment($align) {
+  @if $align == flex-start {
+    @return start;
+  } @else if $align == flex-end {
+    @return end;
+  } @else {
+    @return $align;
+  }
+}
+
+// Flexbox mixins
+@mixin display($type, $args...) {
+  @if $type == flex or $type == inline-flex {
+    @if index($flex-version, box) {
+      @if $type == flex {
+        display: -ms-flexbox;
+        display: -moz-box; // Old Firefox
+        display: -webkit-box; // Old Webkit
+      } @else {
+        display: -ms-inline-flexbox;
+        display: -moz-inline-box;
+        display: -webkit-inline-box;
+      }
+    }
+    @if index($flex-version, flex) {
+      display: -webkit-flex; // New Webkit
+      display: $type; // Official
+    }
+  } @else {
+    display: $type $args;
+  }
+}
+
+@mixin flex-direction($direction) {
+  // Obsolete
+  @if index($flex-version, box) {
+    @if $direction == row-reverse or $direction == column-reverse {
+      @include vendor('box-direction', reverse, $vendor-property: true);
+    }
+    @if $direction == row or $direction == row-reverse {
+      @include vendor('box-orient', horizontal, $vendor-property: true);
+    } @else if $direction == column or $direction == column-reverse {
+      @include vendor('box-orient', vertical, $vendor-property: true);
+    }
+  }
+  // New
+  @if index($flex-version, flex) {
+    @include vendor('flex-direction', $direction, $vendor-property: true);
+  }
+}
+
+@mixin flex-wrap($value) {
+  // Obsolete
+  @if index($flex-version, box) {
+    @if $value == wrap or $value == wrap-reverse {
+      @include vendor('box-lines', multiple, $vendor-property: true);
+    } @else if $value == nowrap {
+      @include vendor('box-lines', single, $vendor-property: true);
+    }
+  }
+  @if index($flex-version, flex) {
+    @include vendor('flex-wrap', $value, $vendor-property: true);
+  }
+}
+
+@mixin flex-flow($args...) {
+  // Obsolete
+  @if index($flex-version, box) {
+    @include flex-direction(nth($args, 1));
+    @if length($args) > 1 {
+      @include flex-wrap(nth($args, 2));
+    }
+  }
+  // New
+  @if index($flex-version, flex) {
+    @include vendor('flex-flow', $args, $vendor-property: true);
+  }
+}
+
+@mixin order($args...) {
+  // Obsolete
+  @if index($flex-version, box) {
+    @include vendor('box-ordinal-group', $args, $vendor-property: true);
+  }
+  // New
+  @if index($flex-version, flex) {
+    @include vendor('flex-order', $args, $vendor-property: true); // MS prefix
+    @include vendor('order', $args, $vendor-property: false); // Official and Webkit
+  }
+}
+
+@mixin flex-grow($growth) {
+  // Obsolete
+  @if index($flex-version, box) {
+    @include vendor('box-flex', $growth, $vendor-property: true);
+  }
+  // New
+  @if index($flex-version, flex) {
+    @include vendor('flex-grow', $growth, $vendor-property: true);
+  }
+}
+
+@mixin flex-basis($args...) {
+  @if index($flex-version, flex) {
+    @include vendor('flex-basis', $args, $vendor-property: true);
+  }
+}
+
+@mixin flex-shrink($args...) {
+  @if index($flex-version, flex) {
+    @include vendor('flex-shrink', $args, $vendor-property: true);
+  }
+}
+
+@mixin flex($growth) {
+  // Obsolete
+  @if index($flex-version, box) {
+    $shrink: 1;
+    @if $growth == none or $growth == initial {
+      $shrink: if($growth == none, 0, 1);
+      $growth: 0;
+    } @else if type-of($growth) == number and unit($growth) != '' { // is-width check
+      $growth: if(length(list-separator($growth)) > 1, nth($growth, 2), 0);
+      $shrink: if(length(list-separator($growth)) > 2, nth($growth, 3), 1);
+    } @else if length(list-separator($growth)) > 1 and type-of(nth($growth, 2)) != number {
+      $shrink: nth($growth, 2);
+    }
+    @include vendor('box-flex', max($growth, $shrink), $vendor-property: true);
+  }
+  // New
+  @if index($flex-version, flex) {
+    @include vendor('flex', $growth, $vendor-property: true);
+  }
+}
+
+@mixin justify-content($align) {
+  // Obsolete
+  @if index($flex-version, box) {
+    @include vendor('box-pack', _convert-justify($align), $vendor-property: true);
+  }
+  // New
+  @if index($flex-version, flex) {
+    @include vendor('flex-pack', _convert-justify($align), $vendor-property: true); // MS prefix
+    @include vendor('justify-content', $align, $vendor-property: false); // Official and Webkit
+  }
+}
+
+@mixin align-content($align) {
+  @if index($flex-version, flex) {
+    @include vendor('flex-line-pack', _convert-justify($align), $vendor-property: true); // MS prefix
+    @include vendor('align-content', $align, $vendor-property: false); // Official and Webkit
+  }
+}
+
+@mixin align-items($align) {
+  // Obsolete
+  @if index($flex-version, box) {
+    @include vendor('box-align', _convert-alignment($align), $vendor-property: true);
+  }
+  // New
+  @if index($flex-version, flex) {
+    @include vendor('flex-align', _convert-alignment($align), $vendor-property: true); // MS prefix
+    @include vendor('align-items', $align, $vendor-property: false); // Official and Webkit
+  }
+}
+
+@mixin align-self($align) {
+  @if index($flex-version, flex) {
+    @include vendor('align-self', $align, $vendor-property: false); // Official and Webkit
+    @include vendor('flex-item-align', _convert-alignment($align), $vendor-property: true); // MS prefix
+  }
+}
