@@ -29,6 +29,7 @@
     "express": "^4.12.2",
     "lodash": "^4.0.0",
     "node-redis-warlock": "~0.2.0",
+    "node-sass-middleware": "^1.1.0",
     "pug": "^2.0.0-beta3",
     "redis": "~2.6.0-2",
     "yargs": "^4.0.0"
